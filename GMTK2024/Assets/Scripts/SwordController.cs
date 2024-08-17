@@ -19,13 +19,13 @@ public class SwignSword : MonoBehaviour
         float axis = Input.GetAxis("Horizontal");
         if(axis < -0.2f && !isLeft) {
             isLeft = true;
-            animator.SetTrigger("Turn");
+            animator.SetBool("isLeft", true);
         }
         else if(axis > 0.2f && isLeft){
             isLeft = false;
-            animator.SetTrigger("Turn");
+            animator.SetBool("isLeft", false);
         }
-        Debug.Log("transform after: " + transform.localPosition);
+
         if(Input.GetMouseButtonDown(0))
             animator.SetTrigger("Attack");
     }
