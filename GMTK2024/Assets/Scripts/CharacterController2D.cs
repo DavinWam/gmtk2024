@@ -1,21 +1,26 @@
+using System.Collections;
 using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
-    public LayerMask climbableLayer;  // Layer to check for climbable objects
-    public float latchDistance = 0.5f;
-    public float checkRadius = 0.2f;
-    public bool debug = false;
     private Rigidbody2D rb;
-    private bool isGrounded;
-    private bool isLatching;
-    public float horizontalLatchDistance = 0.5f;  // Latch distance for left and right
-    public float verticalLatchDistance = 0.3f;  // Latch distance for up and down
-    private Vector2 latchDirection;
+
+    [Header("Ground")]
+    public float checkRadius = 0.2f;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    private bool isGrounded;
+    [Header("Latching")]
+    public float horizontalLatchDistance = 0.5f;  // Latch distance for left and right
+    public float verticalLatchDistance = 0.3f;  // Latch distance for up and down
+    public float latchCooldown = 1.0f;  // Cooldown duration in seconds
+    public LayerMask climbableLayer;  // Layer to check for climbable objects
+    private Vector2 latchDirection;
+    private bool isLatching;
+    private bool canLatch = true;  // Flag to check if latching is allowed
+    public bool debug = false;
 
     void Start()
     {
@@ -27,10 +32,12 @@ public class CharacterController2D : MonoBehaviour
         if (!isLatching)
         {
             Move();
-            Jump();
         }
-
-        CheckForLatch();
+        Jump();
+        if (canLatch)
+        {
+            CheckForLatch();
+        }
     }
 
     void Move()
@@ -43,8 +50,10 @@ public class CharacterController2D : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && (isGrounded || isLatching))
         {
+            if(isLatching) ReleaseLatch();       
+            Debug.Log("jump");
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
@@ -88,7 +97,7 @@ public class CharacterController2D : MonoBehaviour
 
     void AttemptLatch(Vector2 direction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, latchDistance, climbableLayer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, GetLatchDistance(), climbableLayer);
 
         if (hit.collider != null)
         {
@@ -102,14 +111,26 @@ public class CharacterController2D : MonoBehaviour
     {
         isLatching = false;
         rb.isKinematic = false;
+        StartCoroutine(LatchCooldownCoroutine());
     }
+
+    private IEnumerator LatchCooldownCoroutine()
+    {
+        canLatch = false;
+        yield return new WaitForSeconds(latchCooldown);
+        canLatch = true;
+    }
+
 
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
     }
 
-
+    public float GetLatchDistance(){
+        return (latchDirection == Vector2.up || latchDirection == Vector2.down) ? verticalLatchDistance : horizontalLatchDistance;
+                
+    }
     // Draw the ground check and latching gizmos if debug is enabled
     void OnDrawGizmos()
     {
@@ -126,7 +147,7 @@ public class CharacterController2D : MonoBehaviour
             if (latchDirection != Vector2.zero)
             {
                 Gizmos.color = Color.blue;
-                Vector2 latchEndPosition = (Vector2)transform.position + latchDirection * latchDistance;
+                Vector2 latchEndPosition = (Vector2)transform.position + latchDirection * GetLatchDistance();
                 Gizmos.DrawLine(transform.position, latchEndPosition);
                 Gizmos.DrawWireSphere(latchEndPosition, 0.1f);
 

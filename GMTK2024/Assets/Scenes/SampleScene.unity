@@ -648,8 +648,8 @@ MonoBehaviour:
   latchDistance: 0.5
   checkRadius: 0.2
   debug: 1
-  horizontalLatchDistance: 0.5
-  verticalLatchDistance: 0.3
+  horizontalLatchDistance: 0.8
+  verticalLatchDistance: 1.2
   groundCheck: {fileID: 1820666930}
   groundLayer:
     serializedVersion: 2
