@@ -76,15 +76,15 @@ public class PlayerController : MonoBehaviour
 
 
         // Check for ledges using SensorManager
-        if (move != Vector3.zero && playerIsGrounded)
-        {
-            SensorManager sensorManager = GetComponent<SensorManager>();
-            if (sensorManager != null && sensorManager.CheckLedge(move))
-            {
-                // If a ledge is detected, prevent movement in that direction
-                move = Vector3.zero;
-            }
-        }
+        // if (move != Vector3.zero && playerIsGrounded)
+        // {
+        //     SensorManager sensorManager = GetComponent<SensorManager>();
+        //     if (sensorManager != null && sensorManager.CheckLedge(move))
+        //     {
+        //         // If a ledge is detected, prevent movement in that direction
+        //         move = Vector3.zero;
+        //     }
+        // }
         
         characterController.Move(move * Time.deltaTime * currentSpeed);
         
