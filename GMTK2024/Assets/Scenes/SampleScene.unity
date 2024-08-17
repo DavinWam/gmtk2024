@@ -642,8 +642,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
-  debug: 1
+  climbableLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  latchDistance: 0.5
   checkRadius: 0.2
+  debug: 1
+  horizontalLatchDistance: 0.5
+  verticalLatchDistance: 0.3
   groundCheck: {fileID: 1820666930}
   groundLayer:
     serializedVersion: 2
@@ -684,7 +690,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1711875944}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e35e492784ba5c240be64dcbb004942e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
