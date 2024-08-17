@@ -1,1 +1,0 @@
-public enum ActionType { ATTACK, IGNITE, USE_ITEM, SPELL,EMPTY }
