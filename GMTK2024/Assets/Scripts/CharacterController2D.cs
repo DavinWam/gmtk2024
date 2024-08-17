@@ -5,6 +5,7 @@ public class CharacterController2D : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public LayerMask climbableLayer;  // Layer to check for climbable objects
+    public float latchDistance = 0.5f;
     public float checkRadius = 0.2f;
     public bool debug = false;
     private Rigidbody2D rb;
