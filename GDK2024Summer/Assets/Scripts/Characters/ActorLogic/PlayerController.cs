@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public float sprintSpeed = 4.0f; // Sprint speed
     public float currentSpeed;
     private Vector3 playerVelocity = Vector3.zero;
-    private bool groundedPlayer;
+    private bool playerIsGrounded;
     private float gravityValue = -10f;
 
     [Header("Debug")]
@@ -61,9 +61,9 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        groundedPlayer = characterController.isGrounded;
+        playerIsGrounded = characterController.isGrounded;
 
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (playerIsGrounded && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Check for ledges using SensorManager
-        if (move != Vector3.zero)
+        if (move != Vector3.zero && playerIsGrounded)
         {
             SensorManager sensorManager = GetComponent<SensorManager>();
             if (sensorManager != null && sensorManager.CheckLedge(move))
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         if (move.x != 0f || move.z != 0f) // Check if there is any movement
         {
             isRunning = true;
-            if (groundedPlayer)
+            if (playerIsGrounded)
             {
                 dust.gameObject.SetActive(true);
             }
