@@ -7,12 +7,14 @@ public class CharacterController2D : MonoBehaviour
     public float jumpForce = 10f;
     
     private Rigidbody2D rb;
+    private Collider2D col;
 
     [Header("Ground")]
     public float checkRadius = 0.2f;
     public Transform groundCheck;
     public LayerMask groundLayer;
     private bool isGrounded;
+    public float coyoteTime = 0.1f;
     [Header("Latching")]
     public float horizontalLatchDistance = 0.5f;  // Latch distance for left and right
     public float verticalLatchDistance = 0.3f;  // Latch distance for up and down
@@ -26,17 +28,33 @@ public class CharacterController2D : MonoBehaviour
     public float attackCooldown = .3f;
     private bool canAttack= true;
     private bool moveLock = false;
+    private bool inCoyoteTime = false;
+    private bool prevTouchCheck = true;
+    private bool isJumping = false;
     public AnimationController2D animationController2D;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
     }
 
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
         Move();
-        Jump();
         Latch();
+        if(isGrounded || isLatching) {
+            isJumping = false;
+        }
+
+        if(!isGrounded && !isLatching && prevTouchCheck && !isJumping) {
+            StartCoroutine(CoyoteTimeCoroutine());
+        }
+        prevTouchCheck = isGrounded || isLatching;
+
+        Jump();
         Attack();
 
     }
@@ -51,7 +69,7 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator AttackCooldownCoroutine()
     {
         canAttack = false;
-        yield return new WaitForSeconds(latchCooldown);
+        yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
 
@@ -65,19 +83,18 @@ public class CharacterController2D : MonoBehaviour
 
     void Jump()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
-
-        if (Input.GetButtonDown("Jump") && (isGrounded || isLatching))
+        if (Input.GetButtonDown("Jump") && (isGrounded || isLatching || inCoyoteTime))
         {
             float x = 0.0f;
             float y = jumpForce;
-            if(isLatching) {
+            if(!canLatch) {
                 ReleaseLatch();
                 x = Input.GetAxis("Horizontal") * moveSpeed * -1.0f;
                 if(latchDirection == Vector2.down)
                     y *= -1.0f;
             }
             rb.velocity = new Vector2(rb.velocity.x + x, y);
+            isJumping = true;
         }
     }
 
@@ -121,6 +138,10 @@ public class CharacterController2D : MonoBehaviour
             rb.isKinematic = true;  // Stop the character's physics movement
             canLatch = false;
             latchDirection = lookDirection;
+            transform.position = new Vector3(
+                    hit.point.x - (latchDirection.x * col.bounds.size.x)/2.0f,
+                    hit.point.y - (latchDirection.y * col.bounds.size.y)/2.0f,
+                    transform.position.z);
         }
     }
 
@@ -140,6 +161,12 @@ public class CharacterController2D : MonoBehaviour
         moveLock = false;
     }
 
+    private IEnumerator CoyoteTimeCoroutine()
+    {
+        inCoyoteTime = true;
+        yield return new WaitForSeconds(coyoteTime);
+        inCoyoteTime = false;
+    }
 
     public bool IsGrounded()
     {

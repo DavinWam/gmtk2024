@@ -1134,9 +1134,29 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
+      propertyPath: jumpForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
+      propertyPath: moveSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
+      propertyPath: checkRadius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
+      propertyPath: attackCooldown
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
       propertyPath: animationController2D
       value: 
       objectReference: {fileID: 163870517}
+    - target: {fileID: 5140512587680350638, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
+      propertyPath: horizontalLatchDistance
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 6396524775671639797, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
       propertyPath: m_Size.x
       value: 1.1875
