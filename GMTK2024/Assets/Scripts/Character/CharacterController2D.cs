@@ -39,13 +39,15 @@ public class CharacterController2D : MonoBehaviour
     private bool isJumping = false;
     public AnimationController2D animationController2D;
     public event System.Action<float> OnOutOfStamina;
-    
     public event System.Action OnLatchCooldownEnd;
+    
+    private PlayerCombatant playerCombatant;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         currLatchStamina = maxLatchStamina;
+        playerCombatant.OnDamageTaken += ReleaseLatchDamage;
     }
 
     void Update()
@@ -168,7 +170,9 @@ public class CharacterController2D : MonoBehaviour
                     transform.position.z);
         }
     }
-
+    void ReleaseLatchDamage(float damage){
+        ReleaseLatch(longLatchCooldown);
+    }
     void ReleaseLatch(float cooldown)
     {
         isLatching = false;
