@@ -6,7 +6,7 @@ public class AnimationController2D : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private CharacterController2D characterController;
-
+    public event System.Action OnAttackFinished;
  void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,17 +43,20 @@ public class AnimationController2D : MonoBehaviour
         {
             Debug.LogError("SpriteRenderer component not found on this object. Please ensure it is attached.");
         }
-    }
 
+    }
 
     void Update()
     {
         FlipSprite();
         UpdateAnimatorParameters();
-
     }
     public void Attack(){
-        
+            if (characterController.IsLatching()){
+                 animator.SetTrigger("Attack2");
+            }else{
+                animator.SetTrigger("Attack");
+            }           
     }
     void FlipSprite()
     {

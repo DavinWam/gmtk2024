@@ -23,6 +23,8 @@ public class CharacterController2D : MonoBehaviour
     private bool canLatch = true;  // Flag to check if latching is allowed
     public bool debug = false;
 
+    public float attackCooldown = .3f;
+    private bool canAttack= true;
     private bool moveLock = false;
     public AnimationController2D animationController2D;
     void Start()
@@ -35,9 +37,22 @@ public class CharacterController2D : MonoBehaviour
         Move();
         Jump();
         Latch();
-        if(Input.GetMouseButtonDown(0)){
+        Attack();
+
+    }
+
+    private void Attack(){
+        if(Input.GetMouseButtonDown(0) && canAttack){
             animationController2D.Attack();
+            StartCoroutine(AttackCooldownCoroutine());
         }
+    }
+
+    private IEnumerator AttackCooldownCoroutine()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(latchCooldown);
+        canAttack = true;
     }
 
     void Move()
