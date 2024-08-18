@@ -24,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
     public bool debug = false;
 
     private bool moveLock = false;
-
+    public AnimationController2D animationController2D;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +35,9 @@ public class CharacterController2D : MonoBehaviour
         Move();
         Jump();
         Latch();
+        if(Input.GetMouseButtonDown(0)){
+            animationController2D.Attack();
+        }
     }
 
     void Move()

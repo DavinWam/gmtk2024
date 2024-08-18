@@ -50,8 +50,11 @@ public class AnimationController2D : MonoBehaviour
     {
         FlipSprite();
         UpdateAnimatorParameters();
-    }
 
+    }
+    public void Attack(){
+        
+    }
     void FlipSprite()
     {
         float moveInput = rb.velocity.x;
