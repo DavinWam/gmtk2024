@@ -19,6 +19,12 @@ public class CharacterController2D : MonoBehaviour
     public float horizontalLatchDistance = 0.5f;  // Latch distance for left and right
     public float verticalLatchDistance = 0.3f;  // Latch distance for up and down
     public float latchCooldown = 1.0f;  // Cooldown duration in seconds
+    public float longLatchCooldown = 1.0f;
+    public float maxLatchStamina = 100.0f;
+    public float staminaDrainMultiplier = 10.0f;
+    public float staminaGainMultiplierAir = 2.0f;
+    public float staminaGainMultiplierGround = 30.0f;
+    public float currLatchStamina;
     public LayerMask climbableLayer;  // Layer to check for climbable objects
     private Vector2 latchDirection;
     private bool isLatching;
@@ -37,11 +43,23 @@ public class CharacterController2D : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        currLatchStamina = maxLatchStamina;
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
+        if(isLatching) {
+            currLatchStamina -= Time.deltaTime * staminaDrainMultiplier;
+        }
+        else {
+            float gain = isGrounded ? staminaGainMultiplierGround : staminaGainMultiplierAir;
+            currLatchStamina += Time.deltaTime * gain;
+            if(currLatchStamina > maxLatchStamina) {
+                currLatchStamina = maxLatchStamina;
+            }
+        }
 
         Move();
         Latch();
@@ -57,6 +75,9 @@ public class CharacterController2D : MonoBehaviour
         Jump();
         Attack();
 
+        if(isLatching && currLatchStamina <= 0.0f) {
+            ReleaseLatch(longLatchCooldown);
+        }
     }
 
     private void Attack(){
@@ -88,7 +109,7 @@ public class CharacterController2D : MonoBehaviour
             float x = 0.0f;
             float y = jumpForce;
             if(!canLatch) {
-                ReleaseLatch();
+                ReleaseLatch(latchCooldown);
                 x = Input.GetAxis("Horizontal") * moveSpeed * -1.0f;
                 if(latchDirection == Vector2.down)
                     y *= -1.0f;
@@ -124,7 +145,7 @@ public class CharacterController2D : MonoBehaviour
         Vector2 lookDirection = getInputDirection();
 
         if(isLatching && lookDirection != latchDirection) {
-            ReleaseLatch();
+            ReleaseLatch(latchCooldown);
         }
 
         if(!canLatch) return;
@@ -145,18 +166,18 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
-    void ReleaseLatch()
+    void ReleaseLatch(float cooldown)
     {
         isLatching = false;
         rb.isKinematic = false;
-        StartCoroutine(LatchCooldownCoroutine());
+        StartCoroutine(LatchCooldownCoroutine(cooldown));
     }
 
-    private IEnumerator LatchCooldownCoroutine()
+    private IEnumerator LatchCooldownCoroutine(float cooldown)
     {
         canLatch = false;
         moveLock = true;
-        yield return new WaitForSeconds(latchCooldown);
+        yield return new WaitForSeconds(cooldown);
         canLatch = true;
         moveLock = false;
     }
