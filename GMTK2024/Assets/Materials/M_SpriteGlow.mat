@@ -73,6 +73,7 @@ Material:
     - _ZWriteControl: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _InnerGlow: {r: 50.191082, g: 13.263733, b: 1.7361637, a: 1}
     - _OuterColor: {r: 0, g: 802.7323, b: 879.0943, a: 1}
     - _OuterGlow: {r: 23.968628, g: 23.968628, b: 23.968628, a: 1}
