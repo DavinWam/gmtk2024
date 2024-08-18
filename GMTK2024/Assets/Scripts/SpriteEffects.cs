@@ -27,9 +27,7 @@ public class SpriteEffects : MonoBehaviour
             {
                 StopCoroutine(flashingCoroutineRef);
                 flashingCoroutineRef = null;
-                spriteRenderer.color = originalColor;
-                spriteRenderer.material = originalMaterial;
-                spriteRenderer.material.SetColor("_Color",originalColor);
+                ResetSprite();
                 currentPriority = int.MinValue; // Reset priority
             }
         }
@@ -89,43 +87,59 @@ public class SpriteEffects : MonoBehaviour
         }
 
 
-        spriteRenderer.color = originalColor;
-        spriteRenderer.material = originalMaterial;
-        spriteRenderer.material.SetColor("_Color",originalColor);
-        currentPriority = int.MinValue; // Reset priority
+        ResetSprite();
     }
-    private IEnumerator FlashSpeedCoroutine(float duration, Color flashColor){
+    private IEnumerator FlashSpeedCoroutine(float duration, Color flashColor)
+    {
         float elapsedTime = 0f;
         bool isFlashing = true;
         float speedBlinkDuration = blinkDuration;
-        while(elapsedTime< duration){
-            if(isFlashing){
-                if(flashColor == Color.white){
+        while (elapsedTime < duration)
+        {
+            if (isFlashing)
+            {
+                if (flashColor == Color.white)
+                {
                     spriteRenderer.material = spriteWhite;
-                }else{
-                    spriteRenderer.color = flashColor;
-                    spriteRenderer.material.SetColor("_Color",flashColor);
                 }
-                
-            }else{
-                if(flashColor == Color.white){
+                else
+                {
+                    spriteRenderer.color = flashColor;
+                    spriteRenderer.material.SetColor("_Color", flashColor);
+                }
+
+            }
+            else
+            {
+                if (flashColor == Color.white)
+                {
                     spriteRenderer.material = originalMaterial;
-                }else{
+                }
+                else
+                {
                     spriteRenderer.color = originalColor;
-                    spriteRenderer.material.SetColor("_Color",originalColor);
+                    spriteRenderer.material.SetColor("_Color", originalColor);
                 }
             }
             isFlashing = !isFlashing;
             yield return new WaitForSeconds(speedBlinkDuration);
             elapsedTime += speedBlinkDuration;
-            speedBlinkDuration = Mathf.Max(.1f, speedBlinkDuration*.9f);
-            
+            speedBlinkDuration = Mathf.Max(.1f, speedBlinkDuration * .9f);
+
         }
 
+        ResetSprite();
+    }
 
-         spriteRenderer.color = originalColor;
-         spriteRenderer.material = originalMaterial;
-         spriteRenderer.material.SetColor("_Color",originalColor);
-         currentPriority = int.MinValue; // Reset priority
+    private void ResetSprite()
+    {
+        spriteRenderer.material = originalMaterial;
+        SetColor(originalColor);
+        currentPriority = int.MinValue; // Reset priority
+    }
+
+    public void SetColor(Color newColor){
+        spriteRenderer.material.SetColor("_Color",newColor);
+        spriteRenderer.color = newColor;
     }
 }
