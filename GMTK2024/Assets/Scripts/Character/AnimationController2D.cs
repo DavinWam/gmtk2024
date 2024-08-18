@@ -114,11 +114,13 @@ public class AnimationController2D : MonoBehaviour
 
         if (moveInput > 0.05)
         {
-            spriteRenderer.flipX = false; // Facing right
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            //spriteRenderer.flipX = false; // Facing right
         }
         else if (moveInput < -0.05)
         {
-            spriteRenderer.flipX = true; // Facing left
+            //spriteRenderer.flipX = true; // Facing left
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 

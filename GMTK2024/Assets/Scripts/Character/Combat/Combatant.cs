@@ -48,7 +48,7 @@ public abstract class Combatant : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(duration);
         invincible = false;
-        Debug.Log("Invincibility ended.");
+        Debug.Log(gameObject.name + "'s Invincibility ended.");
     }
     protected virtual void Die()
     {

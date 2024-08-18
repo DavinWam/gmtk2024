@@ -37,7 +37,6 @@ public class SegmentAnimationController : MonoBehaviour
         spriteEffects.SetColor(Color.blue);
     }
     public void UnlockAnim(bool unlock){
-        Debug.Log("animation");
         if(unlock){
             animator.SetBool("Unlock", true);
         }else{
