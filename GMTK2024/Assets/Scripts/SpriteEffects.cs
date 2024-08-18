@@ -9,6 +9,7 @@ public class SpriteEffects : MonoBehaviour
     private Color originalColor;
     private Material originalMaterial;
     public Material spriteWhite;
+    private int currentPriority = int.MinValue; // Lowest possible priority
 
     private Coroutine flashingCoroutineRef = null;
     // Start is called before the first frame update
@@ -16,27 +17,48 @@ public class SpriteEffects : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     //for the children
-    public void StopFlash(){
-        StopCoroutine(flashingCoroutineRef);
-    }
-    public void SpriteFlash(float duration, Color flashColor){
-        originalColor = spriteRenderer.material.color;
-        originalMaterial = spriteRenderer.material;
-        if(flashingCoroutineRef != null){
-            StopCoroutine(flashingCoroutineRef);
+  // Stop the current flash effect if the new one has equal or higher priority
+    public void StopFlash(int priority)
+    {
+        if (priority >= currentPriority)
+        {
+            if (flashingCoroutineRef != null)
+            {
+                StopCoroutine(flashingCoroutineRef);
+                flashingCoroutineRef = null;
+                currentPriority = int.MinValue; // Reset priority
+            }
         }
-
-        flashingCoroutineRef = StartCoroutine(FlashCoroutine(duration, flashColor));
     }
-    public void SpeedUpFlash(float duration, Color flashColor){
-        originalColor = spriteRenderer.material.color;
-        originalMaterial = spriteRenderer.material;
-        if(flashingCoroutineRef != null){
-            StopCoroutine(flashingCoroutineRef);
+
+    public void SpriteFlash(float duration, Color flashColor, int priority)
+    {
+        if (priority >= currentPriority)
+        {
+            currentPriority = priority;
+            if (flashingCoroutineRef != null)
+            {
+                StopCoroutine(flashingCoroutineRef);
+            }
+
+            flashingCoroutineRef = StartCoroutine(FlashCoroutine(duration, flashColor));
         }
-
-        flashingCoroutineRef = StartCoroutine(FlashSpeedCoroutine(duration, flashColor));
     }
+
+    public void SpeedUpFlash(float duration, Color flashColor, int priority)
+    {
+        if (priority >= currentPriority)
+        {
+            currentPriority = priority;
+            if (flashingCoroutineRef != null)
+            {
+                StopCoroutine(flashingCoroutineRef);
+            }
+
+            flashingCoroutineRef = StartCoroutine(FlashSpeedCoroutine(duration, flashColor));
+        }
+    }
+
     private IEnumerator FlashCoroutine(float duration, Color flashColor){
         float elapsedTime = 0f;
         bool isFlashing = true;

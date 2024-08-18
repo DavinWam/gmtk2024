@@ -38,7 +38,9 @@ public class CharacterController2D : MonoBehaviour
     private bool prevTouchCheck = true;
     private bool isJumping = false;
     public AnimationController2D animationController2D;
-    public event System.Action OnOutOfStamina;
+    public event System.Action<float> OnOutOfStamina;
+    
+    public event System.Action OnLatchCooldownEnd;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -77,7 +79,7 @@ public class CharacterController2D : MonoBehaviour
 
         if(isLatching && currLatchStamina <= 0.0f) {
             ReleaseLatch(longLatchCooldown);
-            OnOutOfStamina?.Invoke();
+            OnOutOfStamina?.Invoke(longLatchCooldown);
         }
     }
 
@@ -181,6 +183,8 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         canLatch = true;
         moveLock = false;
+        AddStamina(maxLatchStamina/15f);
+        OnLatchCooldownEnd?.Invoke();
     }
 
     private IEnumerator CoyoteTimeCoroutine()
@@ -189,7 +193,9 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(coyoteTime);
         inCoyoteTime = false;
     }
-
+    public void AddStamina(float amount){
+        currLatchStamina = Mathf.Min(currLatchStamina+amount,maxLatchStamina);
+    }
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);

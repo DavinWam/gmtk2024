@@ -55,6 +55,7 @@ public class AnimationController2D : MonoBehaviour
         }
 
         characterController.OnOutOfStamina += StaminaFlash;
+        characterController.OnLatchCooldownEnd += EndStaminaFlash;
     }
 
     void Update()
@@ -70,19 +71,25 @@ public class AnimationController2D : MonoBehaviour
             IsWarning = true;
             spriteRenderer.material.SetColor("_Color", Color.white);
             spriteEffects.SpeedUpFlash(characterController.currLatchStamina/characterController.staminaDrainMultiplier
-            ,Color.red);
+            ,Color.red,0);
         }
         if( IsWarning && !characterController.IsLatching() && (characterController.IsLatching() || characterController.currLatchStamina > characterController.maxLatchStamina*dropWarningPercent)){
             IsWarning = false;
         }
     }
-    public void StaminaFlash(){
+    public void StaminaFlash(float duration){
         Debug.Log("stamina out");
         if(characterController != null){
             spriteRenderer.material.SetColor("_Color", Color.white);
-            spriteEffects.SpriteFlash(characterController.longLatchCooldown, new Color(1,0.6132074f,0.6132074f));
-        }
-        
+            spriteEffects.SpriteFlash(duration, new Color(1,0.6132074f,0.6132074f),0);
+        }  
+    }
+    public void EndStaminaFlash(){
+        Debug.Log("can grab again");
+        if(characterController != null){
+            spriteRenderer.material.SetColor("_Color", Color.white);
+            spriteEffects.StopFlash(0);
+        }  
     }
     public void Attack(){
             if (characterController.IsLatching()){
@@ -93,7 +100,7 @@ public class AnimationController2D : MonoBehaviour
     }
     public void DamageAnim(float amount){
         animator.SetTrigger("Hit");
-        spriteEffects.SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white);
+        spriteEffects.SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white,1);
     }
     public void DieAnim(){
         animator.SetTrigger("Death");
