@@ -69,6 +69,7 @@ public class AnimationController2D : MonoBehaviour
             && !IsWarning){
                 Debug.Log("djkaljdlk");
             IsWarning = true;
+            spriteEffects.StopFlash(1);
             spriteRenderer.material.SetColor("_Color", Color.white);
             spriteEffects.SpeedUpFlash(characterController.currLatchStamina/characterController.staminaDrainMultiplier
             ,Color.red,0);
@@ -80,6 +81,7 @@ public class AnimationController2D : MonoBehaviour
     public void StaminaFlash(float duration){
         Debug.Log("stamina out");
         if(characterController != null){
+            spriteEffects.StopFlash(1);
             spriteRenderer.material.SetColor("_Color", Color.white);
             spriteEffects.SpriteFlash(duration, new Color(1,0.6132074f,0.6132074f),0);
         }  

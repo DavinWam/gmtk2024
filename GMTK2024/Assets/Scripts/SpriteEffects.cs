@@ -27,6 +27,9 @@ public class SpriteEffects : MonoBehaviour
             {
                 StopCoroutine(flashingCoroutineRef);
                 flashingCoroutineRef = null;
+                spriteRenderer.color = originalColor;
+                spriteRenderer.material = originalMaterial;
+                spriteRenderer.material.SetColor("_Color",originalColor);
                 currentPriority = int.MinValue; // Reset priority
             }
         }
@@ -87,8 +90,9 @@ public class SpriteEffects : MonoBehaviour
 
 
         spriteRenderer.color = originalColor;
-         spriteRenderer.material = originalMaterial;
-         spriteRenderer.material.SetColor("_Color",originalColor);
+        spriteRenderer.material = originalMaterial;
+        spriteRenderer.material.SetColor("_Color",originalColor);
+        currentPriority = int.MinValue; // Reset priority
     }
     private IEnumerator FlashSpeedCoroutine(float duration, Color flashColor){
         float elapsedTime = 0f;
@@ -122,5 +126,6 @@ public class SpriteEffects : MonoBehaviour
          spriteRenderer.color = originalColor;
          spriteRenderer.material = originalMaterial;
          spriteRenderer.material.SetColor("_Color",originalColor);
+         currentPriority = int.MinValue; // Reset priority
     }
 }
