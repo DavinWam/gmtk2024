@@ -15,6 +15,7 @@ public class SpriteEffects : MonoBehaviour
     // Start is called before the first frame update
     public void Start(){
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalMaterial = spriteRenderer.material;
     }
     //for the children
   // Stop the current flash effect if the new one has equal or higher priority
@@ -40,7 +41,7 @@ public class SpriteEffects : MonoBehaviour
             {
                 StopCoroutine(flashingCoroutineRef);
             }
-
+            originalColor = spriteRenderer.color;   
             flashingCoroutineRef = StartCoroutine(FlashCoroutine(duration, flashColor));
         }
     }
@@ -54,7 +55,7 @@ public class SpriteEffects : MonoBehaviour
             {
                 StopCoroutine(flashingCoroutineRef);
             }
-
+            originalColor = spriteRenderer.color;
             flashingCoroutineRef = StartCoroutine(FlashSpeedCoroutine(duration, flashColor));
         }
     }
@@ -118,7 +119,7 @@ public class SpriteEffects : MonoBehaviour
         }
 
 
-        spriteRenderer.color = originalColor;
+         spriteRenderer.color = originalColor;
          spriteRenderer.material = originalMaterial;
          spriteRenderer.material.SetColor("_Color",originalColor);
     }
