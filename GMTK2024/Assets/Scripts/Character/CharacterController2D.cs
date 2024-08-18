@@ -53,7 +53,7 @@ public class CharacterController2D : MonoBehaviour
         if(isLatching) {
             currLatchStamina -= Time.deltaTime * staminaDrainMultiplier;
         }
-        else {
+        else if(canLatch) {
             float gain = isGrounded ? staminaGainMultiplierGround : staminaGainMultiplierAir;
             currLatchStamina += Time.deltaTime * gain;
             if(currLatchStamina > maxLatchStamina) {
