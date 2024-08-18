@@ -69,25 +69,35 @@ public class AnimationController2D : MonoBehaviour
     void UpdateAnimatorParameters()
     {
         bool isGrounded = characterController.IsGrounded(); // Assuming IsGrounded is a method in CharacterController2D
+        bool isLatching = characterController.IsLatching();
 
-        // Check if character is moving horizontally and grounded
-        if (Mathf.Abs(rb.velocity.x) > 0.1f && isGrounded)
+        if (isLatching)
         {
-            animator.SetBool("IsRunning", true);
-        }
-        else
-        {
+            animator.SetBool("IsLatching", true);
             animator.SetBool("IsRunning", false);
+            animator.SetBool("IsJumping", false);
+        }else{
+             animator.SetBool("IsLatching", false);
+            // Check if character is moving horizontally and grounded
+            if (Mathf.Abs(rb.velocity.x) > 0.1f && isGrounded)
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", false);
+            }
+
+            // Check if the character is not grounded
+            if (!isGrounded)
+            {
+                animator.SetBool("IsJumping", true);
+            }
+            else
+            {
+                animator.SetBool("IsJumping", false);
+            }
         }
 
-        // Check if the character is not grounded
-        if (!isGrounded)
-        {
-            animator.SetBool("IsJumping", true);
-        }
-        else
-        {
-            animator.SetBool("IsJumping", false);
-        }
     }
 }

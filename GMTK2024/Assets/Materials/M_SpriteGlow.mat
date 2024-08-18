@@ -58,7 +58,7 @@ Material:
     - _DstBlend: 10
     - _EdgeAlpha: 1
     - _Float: 1
-    - _InnerWidth: 1
+    - _InnerWidth: 0
     - _OuterEdge: 1
     - _OuterFallOff: 1
     - _OuterWidth: 0

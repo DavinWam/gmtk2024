@@ -125,11 +125,14 @@ public class CharacterController2D : MonoBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
     }
-
+    public bool IsLatching(){
+        return isLatching;
+    }
     public float GetLatchDistance(){
         return (latchDirection == Vector2.up || latchDirection == Vector2.down) ? verticalLatchDistance : horizontalLatchDistance;
                 
     }
+
     // Draw the ground check and latching gizmos if debug is enabled
     void OnDrawGizmos()
     {
