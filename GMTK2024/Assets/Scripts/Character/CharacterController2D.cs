@@ -23,6 +23,8 @@ public class CharacterController2D : MonoBehaviour
     private bool canLatch = true;  // Flag to check if latching is allowed
     public bool debug = false;
 
+    private bool moveLock = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,19 +32,15 @@ public class CharacterController2D : MonoBehaviour
 
     void Update()
     {
-        if (!isLatching)
-        {
-            Move();
-        }
+        Move();
         Jump();
-        if (canLatch)
-        {
-            CheckForLatch();
-        }
+        Latch();
     }
 
     void Move()
     {
+        if(moveLock || isLatching) return;
+
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
     }
@@ -53,56 +51,58 @@ public class CharacterController2D : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && (isGrounded || isLatching))
         {
-            if(isLatching) ReleaseLatch();       
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            float x = 0.0f;
+            float y = jumpForce;
+            if(isLatching) {
+                ReleaseLatch();
+                x = Input.GetAxis("Horizontal") * moveSpeed * -1.0f;
+                if(latchDirection == Vector2.down)
+                    y *= -1.0f;
+            }
+            rb.velocity = new Vector2(rb.velocity.x + x, y);
         }
     }
 
-    void CheckForLatch()
-    {
-        // Check for latch input and direction
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+    Vector2 getInputDirection() {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            latchDirection = Vector2.zero;
-
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            {
-                latchDirection = Vector2.up;
-            }
-            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-                latchDirection = Vector2.down;
-            }
-            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                latchDirection = Vector2.left;
-            }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                latchDirection = Vector2.right;
-            }
-            if (latchDirection != Vector2.zero)
-            {
-                AttemptLatch(latchDirection);
-            }
+            return Vector2.up;
+        }
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            return Vector2.down;
+        }
+        else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            return Vector2.left;
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            return Vector2.right;
         }
 
-        // Release latch when the left shift key is released
-        if (isLatching && Input.GetKeyUp(KeyCode.LeftShift))
-        {
+        return Vector2.zero;
+    }
+
+    void Latch()
+    {
+        Vector2 lookDirection = getInputDirection();
+
+        if(isLatching && lookDirection != latchDirection) {
             ReleaseLatch();
         }
-    }
 
-    void AttemptLatch(Vector2 direction)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, GetLatchDistance(), climbableLayer);
+        if(!canLatch) return;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, lookDirection, GetLatchDistance(), climbableLayer);
 
         if (hit.collider != null)
         {
             isLatching = true;
             rb.velocity = Vector2.zero;
             rb.isKinematic = true;  // Stop the character's physics movement
+            canLatch = false;
+            latchDirection = lookDirection;
         }
     }
 
@@ -116,8 +116,10 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator LatchCooldownCoroutine()
     {
         canLatch = false;
+        moveLock = true;
         yield return new WaitForSeconds(latchCooldown);
         canLatch = true;
+        moveLock = false;
     }
 
 
