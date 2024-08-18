@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : UIElement
 {
     public Combatant damageableObject;  // Reference to an object that implements IDamageable
-    public Slider healthSlider;           // Reference to the slider UI element
+    public Slider healthSlider;// Reference to the slider UI element
 
     void Start()
     {

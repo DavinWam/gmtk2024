@@ -6,15 +6,22 @@ public class AnimationController2D : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private CharacterController2D characterController;
+    private PlayerCombatant playerCombatant;
     public event System.Action OnAttackFinished;
  void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
         animator = GetComponent<Animator>();
 
         // Get the CharacterController2D from the parent object
         characterController = GetComponentInParent<CharacterController2D>();
-
+        playerCombatant = GetComponentInParent<PlayerCombatant>();
+        
+        if(playerCombatant){
+            playerCombatant.OnDamageTaken += DamageAnim;
+            playerCombatant.OnDeath += DieAnim;
+        }
         // Check if characterController is found
         if (characterController == null)
         {
@@ -48,8 +55,11 @@ public class AnimationController2D : MonoBehaviour
 
     void Update()
     {
-        FlipSprite();
-        UpdateAnimatorParameters();
+        if(!playerCombatant.dead){
+            FlipSprite();
+            UpdateAnimatorParameters();
+        }
+
     }
     public void Attack(){
             if (characterController.IsLatching()){
@@ -57,6 +67,14 @@ public class AnimationController2D : MonoBehaviour
             }else{
                 animator.SetTrigger("Attack");
             }           
+    }
+    public void DamageAnim(float amount){
+        animator.SetTrigger("Hit");
+        GetComponent<SpriteEffects>().SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white);
+    }
+    public void DieAnim(){
+        animator.SetTrigger("Death");
+        animator.SetBool("IsDead", true);
     }
     void FlipSprite()
     {
