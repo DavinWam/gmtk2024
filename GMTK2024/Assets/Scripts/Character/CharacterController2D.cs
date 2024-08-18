@@ -38,7 +38,7 @@ public class CharacterController2D : MonoBehaviour
     private bool prevTouchCheck = true;
     private bool isJumping = false;
     public AnimationController2D animationController2D;
-
+    public event System.Action OnOutOfStamina;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -77,6 +77,7 @@ public class CharacterController2D : MonoBehaviour
 
         if(isLatching && currLatchStamina <= 0.0f) {
             ReleaseLatch(longLatchCooldown);
+            OnOutOfStamina?.Invoke();
         }
     }
 
@@ -195,6 +196,9 @@ public class CharacterController2D : MonoBehaviour
     }
     public bool IsLatching(){
         return isLatching;
+    }
+    public bool CanLatch(){
+        return canLatch;
     }
     public float GetLatchDistance(){
         return (latchDirection == Vector2.up || latchDirection == Vector2.down) ? verticalLatchDistance : horizontalLatchDistance;

@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class AnimationController2D : MonoBehaviour
 {
+    public float dropWarningPercent = .2f;
+    public bool IsWarning = false;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
     private CharacterController2D characterController;
     private PlayerCombatant playerCombatant;
+    private SpriteEffects spriteEffects;
     public event System.Action OnAttackFinished;
  void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        spriteEffects = GetComponent<SpriteEffects>();
         animator = GetComponent<Animator>();
 
         // Get the CharacterController2D from the parent object
@@ -51,6 +54,7 @@ public class AnimationController2D : MonoBehaviour
             Debug.LogError("SpriteRenderer component not found on this object. Please ensure it is attached.");
         }
 
+        characterController.OnOutOfStamina += StaminaFlash;
     }
 
     void Update()
@@ -59,7 +63,26 @@ public class AnimationController2D : MonoBehaviour
             FlipSprite();
             UpdateAnimatorParameters();
         }
-
+        
+        if(characterController.currLatchStamina <= characterController.maxLatchStamina*dropWarningPercent
+            && !IsWarning){
+                Debug.Log("djkaljdlk");
+            IsWarning = true;
+            spriteRenderer.material.SetColor("_Color", Color.white);
+            spriteEffects.SpeedUpFlash(characterController.currLatchStamina/characterController.staminaDrainMultiplier
+            ,Color.red);
+        }
+        if( IsWarning && !characterController.IsLatching() && (characterController.IsLatching() || characterController.currLatchStamina > characterController.maxLatchStamina*dropWarningPercent)){
+            IsWarning = false;
+        }
+    }
+    public void StaminaFlash(){
+        Debug.Log("stamina out");
+        if(characterController != null){
+            spriteRenderer.material.SetColor("_Color", Color.white);
+            spriteEffects.SpriteFlash(characterController.longLatchCooldown, new Color(1,0.6132074f,0.6132074f));
+        }
+        
     }
     public void Attack(){
             if (characterController.IsLatching()){
@@ -70,7 +93,7 @@ public class AnimationController2D : MonoBehaviour
     }
     public void DamageAnim(float amount){
         animator.SetTrigger("Hit");
-        GetComponent<SpriteEffects>().SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white);
+        spriteEffects.SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white);
     }
     public void DieAnim(){
         animator.SetTrigger("Death");
