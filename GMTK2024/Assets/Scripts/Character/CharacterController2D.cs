@@ -47,6 +47,7 @@ public class CharacterController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         currLatchStamina = maxLatchStamina;
+        playerCombatant = GetComponent<PlayerCombatant>();
         playerCombatant.OnDamageTaken += ReleaseLatchDamage;
     }
 
@@ -170,23 +171,27 @@ public class CharacterController2D : MonoBehaviour
                     transform.position.z);
         }
     }
+
     void ReleaseLatchDamage(float damage){
-        ReleaseLatch(longLatchCooldown);
+        ReleaseLatch(longLatchCooldown, false);
     }
-    void ReleaseLatch(float cooldown)
+
+    void ReleaseLatch(float cooldown, bool lockMovement = true)
     {
         isLatching = false;
         rb.isKinematic = false;
-        StartCoroutine(LatchCooldownCoroutine(cooldown));
+        StartCoroutine(LatchCooldownCoroutine(cooldown, lockMovement));
     }
 
-    private IEnumerator LatchCooldownCoroutine(float cooldown)
+    private IEnumerator LatchCooldownCoroutine(float cooldown, bool lockMovement)
     {
         canLatch = false;
-        moveLock = true;
+        if(lockMovement)
+            moveLock = true;
         yield return new WaitForSeconds(cooldown);
         canLatch = true;
-        moveLock = false;
+        if(lockMovement)
+            moveLock = false;
         AddStamina(maxLatchStamina/15f);
         OnLatchCooldownEnd?.Invoke();
     }
