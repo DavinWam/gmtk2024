@@ -1740,32 +1740,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 1821937626}
   staminaSlider: {fileID: 1389878044}
---- !u!1 &949176213 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6486709947005851245, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-  m_PrefabInstance: {fileID: 7171007998903077878}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &949176219 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4318243496250142677, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-  m_PrefabInstance: {fileID: 7171007998903077878}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &949176220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949176213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ab0df67b2fc0f4dbc624ead50688e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageableLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  damageAmount: 10
 --- !u!1 &989738452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,37 +2321,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1600712374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1600712375}
-  m_Layer: 7
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1600712375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600712374}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 949176219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1711875949 stripped
 MonoBehaviour:
@@ -3360,36 +3303,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6673791880977418225, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_Size.x
-      value: 0.0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673791880977418225, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_Size.y
-      value: 0.0001
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673791880977418225, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673791880977418225, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6673791880977418225, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_UsedByEffector
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 4318243496250142677, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1600712375}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6486709947005851245, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 949176220}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
 --- !u!1001 &7699526340745614499
 PrefabInstance:
