@@ -3,32 +3,66 @@ using UnityEngine;
 
 public class UILayer : MonoBehaviour, IUILayer
 {
-    private Stack<UIElement> uiStack = new Stack<UIElement>();
+    private List<UIElement> uiElements = new List<UIElement>();
+
+    // Reference to the UIManager to access other layers
+    private UIManager uiManager;
+
+    void Start()
+    {
+        uiManager = UIManager.Instance; // Get the reference to the UIManager
+    }
 
     public void Push(UIElement element)
     {
-        uiStack.Push(element);
-        element.Show(); // Assuming UIElement has a Show method to make it visible
+        uiElements.Add(element);
+        element.Show(); // Show the UI element
     }
 
     public UIElement Pop()
     {
-        if (uiStack.Count > 0)
+        if (uiElements.Count > 0)
         {
-            UIElement topElement = uiStack.Pop();
-            topElement.Hide(); // Assuming UIElement has a Hide method to make it invisible
+            UIElement topElement = uiElements[uiElements.Count - 1];
+            uiElements.RemoveAt(uiElements.Count - 1);
+            topElement.Hide(); // Hide the UI element
             return topElement;
+        }
+        return null;
+    }
+
+    public UIElement Pop(UIElement element)
+    {
+        if (uiElements.Contains(element))
+        {
+            uiElements.Remove(element);
+            element.Hide(); // Hide the specific UI element
+            return element;
         }
         return null;
     }
 
     public UIElement Peek()
     {
-        return uiStack.Count > 0 ? uiStack.Peek() : null;
+        return uiElements.Count > 0 ? uiElements[uiElements.Count - 1] : null;
     }
 
     public bool IsEmpty()
     {
-        return uiStack.Count == 0;
+        return uiElements.Count == 0;
+    }
+
+    // New method to hide other UI layers
+    public void HideOthers(){
+        uiManager.HideOtherLayers(this);
+    }
+
+    // Method to hide all UI elements in the current layer
+    public void HideAll()
+    {
+        foreach (UIElement element in uiElements)
+        {
+            element.Hide();
+        }
     }
 }

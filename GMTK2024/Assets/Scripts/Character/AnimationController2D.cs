@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationController2D : MonoBehaviour
@@ -10,7 +11,7 @@ public class AnimationController2D : MonoBehaviour
     private CharacterController2D characterController;
     private PlayerCombatant playerCombatant;
     private SpriteEffects spriteEffects;
-    public event System.Action OnAttackFinished;
+    public event System.Action OnFinishedIntroWalk;
  void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -157,5 +158,8 @@ public class AnimationController2D : MonoBehaviour
             }
         }
 
+    }
+    public void TriggerFinishedWalk(){
+        OnFinishedIntroWalk?.Invoke();
     }
 }
