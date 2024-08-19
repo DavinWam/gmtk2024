@@ -60,10 +60,7 @@ public class CharacterController2D : MonoBehaviour
         }
         else if(canLatch) {
             float gain = isGrounded ? staminaGainMultiplierGround : staminaGainMultiplierAir;
-            currLatchStamina += Time.deltaTime * gain;
-            if(currLatchStamina > maxLatchStamina) {
-                currLatchStamina = maxLatchStamina;
-            }
+            AddStamina(Time.deltaTime * gain);
         }
 
         Move();
@@ -192,7 +189,6 @@ public class CharacterController2D : MonoBehaviour
         canLatch = true;
         if(lockMovement)
             moveLock = false;
-        AddStamina(maxLatchStamina/15f);
         OnLatchCooldownEnd?.Invoke();
     }
 
