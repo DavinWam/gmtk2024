@@ -5,6 +5,7 @@ public class BasicHazard : Hazard
 {
     private Collider2D hazardCollider;
     private float duration;
+
     public virtual void Awake()
     {
         // Get the BoxCollider2D component on this GameObject
@@ -35,18 +36,24 @@ public class BasicHazard : Hazard
             hazardCollider.enabled = false;
         }
     }
+
     public override void HandleDuration(){
         Debug.Log("duration");
+        if(duration == 0) return;
+
         StartCoroutine(AutoClose());
     }
+     
     IEnumerator AutoClose(){
         yield return new WaitForSeconds(duration);
         TurnOff();
     }
+     
     public override void SetDuration(float newDuration)
     {
         duration = newDuration;
     }
+
     public override float GetDuration()
     {
         return duration;
