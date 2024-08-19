@@ -58,6 +58,26 @@ public class UIManager : MonoBehaviour
     {
         return modalLayer;
     }
+    // Method to hide all other UI layers except the one passed as a parameter
+    public void HideOtherLayers(UILayer activeLayer)
+    {
+        if (gameLayer != activeLayer)
+        {
+            gameLayer.HideAll();
+        }
+        if (gameMenuLayer != activeLayer)
+        {
+            gameMenuLayer.HideAll();
+        }
+        if (menuLayer != activeLayer)
+        {
+            menuLayer.HideAll();
+        }
+        if (modalLayer != activeLayer)
+        {
+            modalLayer.HideAll();
+        }
+    }
 }
 
 

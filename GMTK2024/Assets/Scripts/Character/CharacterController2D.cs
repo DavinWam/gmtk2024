@@ -40,8 +40,9 @@ public class CharacterController2D : MonoBehaviour
     public AnimationController2D animationController2D;
     public event System.Action<float> OnOutOfStamina;
     public event System.Action OnLatchCooldownEnd;
-    
+    public event System.Action OnGrounded;
     private PlayerCombatant playerCombatant;
+    private bool isLocked = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +54,9 @@ public class CharacterController2D : MonoBehaviour
 
     void Update()
     {
+        
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        if(isLocked) return;
 
         if(isLatching) {
             currLatchStamina -= Time.deltaTime * staminaDrainMultiplier;
@@ -203,7 +206,15 @@ public class CharacterController2D : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        if(isGrounded == Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer)){
+            return isGrounded;
+        }else{
+            if(isGrounded == false){
+                OnGrounded?.Invoke();
+            }
+            
+            return !isGrounded;
+        }
     }
     public bool IsLatching(){
         return isLatching;
@@ -215,7 +226,12 @@ public class CharacterController2D : MonoBehaviour
         return (latchDirection == Vector2.up || latchDirection == Vector2.down) ? verticalLatchDistance : horizontalLatchDistance;
                 
     }
-
+    public void SetLock(bool locked){
+        isLocked = locked;
+    }
+    public bool GetLock(){
+        return isLocked;
+    }
     // Draw the ground check and latching gizmos if debug is enabled
     void OnDrawGizmos()
     {
