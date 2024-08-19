@@ -62,8 +62,10 @@ public class AnimationController2D : MonoBehaviour
     void Update()
     {
         if(!playerCombatant.dead){
-            FlipSprite();
             UpdateAnimatorParameters();
+            if(!characterController.IsLatching()){
+                FlipSprite();
+            }
         }
         
         if(characterController.currLatchStamina <= characterController.maxLatchStamina*dropWarningPercent
