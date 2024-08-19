@@ -32601,17 +32601,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4226473290436993033, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4629244021313792526, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629244021313792526, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6489522887925485539, guid: 59161543e0c2dd4429ddb1c14e7aa731, type: 3}
       propertyPath: m_LocalPosition.x
