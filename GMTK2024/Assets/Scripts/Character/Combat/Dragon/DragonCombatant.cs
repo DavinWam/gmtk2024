@@ -11,52 +11,57 @@ public class DragonCombatant :Combatant
     public UnityEvent<float> onHitUnityEvent;
     public UnityEvent onUnlockUnityEvent;
     public UnityEvent onLockUnityEvent;
-    public override void Awake()
-    {
+
+    public override void Awake() {
         base.Awake();
         entityStats = Instantiate(entityStats);
     }
-    public override void TakeDamage(float amount){
+
+    public override void TakeDamage(float amount) {
         if(!invincible && !dead){
             entityStats.currentHealth -= amount;
             base.TakeDamage(amount);
             Debug.Log($"{gameObject.name} took {amount} damage. Remaining health: {entityStats.currentHealth}");
             onHitUnityEvent.Invoke(amount);
-            if (entityStats.currentHealth <= 0)
-            {
+            if (entityStats.currentHealth <= 0) {
                 Die();
-            }else{
+            }
+            else {
                  SetInvincibility(HitInvinciblityDuration);
-                 
             }
         }
     }
-    protected override void Die()
-    {
+
+    protected override void Die() {
         // You can add enemy-specific death logic here
         base.Die();
         ProgressSegments();
         onDeathUnityEvent.Invoke();
     }
-    private void ProgressSegments(){
+
+    private void ProgressSegments() {
         foreach(DragonCombatant segment in linkedSegments){
             segment.unlock(true);
         }
     }
-    public void unlock(bool unlock){
-        if(unlock){
+
+    public void unlock(bool unlock) {
+        if(unlock) {
             SetUnlock();
-        }else{
+        }
+        else {
             SetLock();
         }
 
     }
-    public void SetLock(){
+
+    public void SetLock() {
         invincible = true;
         OnUnlocked?.Invoke(false);
         onUnlockUnityEvent.Invoke();
     }
-    public void SetUnlock(){
+
+    public void SetUnlock() {
         invincible = false;
         Debug.Log(gameObject.name);
         OnUnlocked?.Invoke(true);

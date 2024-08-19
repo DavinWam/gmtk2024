@@ -34,7 +34,7 @@ public class SegmentAnimationController : MonoBehaviour
     }
     public void DeathAnim(){
         spriteEffects.StopFlash(1);
-        spriteEffects.SetColor(Color.blue);
+        animator.SetBool("Death", true);
     }
     public void UnlockAnim(bool unlock){
         if(unlock){
