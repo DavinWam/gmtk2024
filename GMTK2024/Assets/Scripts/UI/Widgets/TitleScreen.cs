@@ -37,6 +37,13 @@ public class TitleScreen : MonoBehaviour
         // Load the scene after the delay
         SceneManager.LoadSceneAsync(sceneName);
     }
+    
+    public void EndGame()
+    {
+        SceneManager.LoadSceneAsync("EndScene");
+    }
+
+
     public void PushAllChildren()
     {
         foreach (Transform child in transform)
