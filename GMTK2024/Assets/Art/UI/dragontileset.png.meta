@@ -100,7 +100,7 @@ TextureImporter:
       name: dragontileset_0
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 80
         width: 16
         height: 16
@@ -121,7 +121,7 @@ TextureImporter:
       name: dragontileset_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 16
         y: 80
         width: 16
         height: 16
@@ -142,7 +142,7 @@ TextureImporter:
       name: dragontileset_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 80
         width: 16
         height: 16
@@ -163,7 +163,7 @@ TextureImporter:
       name: dragontileset_3
       rect:
         serializedVersion: 2
-        x: 80
+        x: 48
         y: 80
         width: 16
         height: 16
@@ -184,7 +184,7 @@ TextureImporter:
       name: dragontileset_4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 80
         width: 16
         height: 16
@@ -205,7 +205,7 @@ TextureImporter:
       name: dragontileset_5
       rect:
         serializedVersion: 2
-        x: 112
+        x: 80
         y: 80
         width: 16
         height: 16
@@ -226,7 +226,7 @@ TextureImporter:
       name: dragontileset_6
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 64
         width: 16
         height: 16
@@ -247,7 +247,7 @@ TextureImporter:
       name: dragontileset_7
       rect:
         serializedVersion: 2
-        x: 32
+        x: 16
         y: 64
         width: 16
         height: 16
@@ -268,7 +268,7 @@ TextureImporter:
       name: dragontileset_8
       rect:
         serializedVersion: 2
-        x: 48
+        x: 32
         y: 64
         width: 16
         height: 16
@@ -289,7 +289,7 @@ TextureImporter:
       name: dragontileset_9
       rect:
         serializedVersion: 2
-        x: 64
+        x: 48
         y: 64
         width: 16
         height: 16
@@ -310,7 +310,7 @@ TextureImporter:
       name: dragontileset_10
       rect:
         serializedVersion: 2
-        x: 80
+        x: 64
         y: 64
         width: 16
         height: 16
@@ -394,8 +394,8 @@ TextureImporter:
       name: dragontileset_14
       rect:
         serializedVersion: 2
-        x: 144
-        y: 64
+        x: 0
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -415,7 +415,7 @@ TextureImporter:
       name: dragontileset_15
       rect:
         serializedVersion: 2
-        x: 0
+        x: 16
         y: 48
         width: 16
         height: 16
@@ -436,7 +436,7 @@ TextureImporter:
       name: dragontileset_16
       rect:
         serializedVersion: 2
-        x: 16
+        x: 32
         y: 48
         width: 16
         height: 16
@@ -457,7 +457,7 @@ TextureImporter:
       name: dragontileset_17
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 48
         width: 16
         height: 16
@@ -478,7 +478,7 @@ TextureImporter:
       name: dragontileset_18
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 48
         width: 16
         height: 16
@@ -562,8 +562,8 @@ TextureImporter:
       name: dragontileset_22
       rect:
         serializedVersion: 2
-        x: 128
-        y: 48
+        x: 48
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -583,8 +583,8 @@ TextureImporter:
       name: dragontileset_23
       rect:
         serializedVersion: 2
-        x: 144
-        y: 48
+        x: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -604,7 +604,7 @@ TextureImporter:
       name: dragontileset_24
       rect:
         serializedVersion: 2
-        x: 0
+        x: 80
         y: 32
         width: 16
         height: 16
@@ -625,7 +625,7 @@ TextureImporter:
       name: dragontileset_25
       rect:
         serializedVersion: 2
-        x: 16
+        x: 96
         y: 32
         width: 16
         height: 16
@@ -646,7 +646,7 @@ TextureImporter:
       name: dragontileset_26
       rect:
         serializedVersion: 2
-        x: 32
+        x: 112
         y: 32
         width: 16
         height: 16
@@ -667,7 +667,7 @@ TextureImporter:
       name: dragontileset_27
       rect:
         serializedVersion: 2
-        x: 48
+        x: 128
         y: 32
         width: 16
         height: 16
@@ -688,7 +688,7 @@ TextureImporter:
       name: dragontileset_28
       rect:
         serializedVersion: 2
-        x: 64
+        x: 144
         y: 32
         width: 16
         height: 16
@@ -709,8 +709,8 @@ TextureImporter:
       name: dragontileset_29
       rect:
         serializedVersion: 2
-        x: 80
-        y: 32
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -730,8 +730,8 @@ TextureImporter:
       name: dragontileset_30
       rect:
         serializedVersion: 2
-        x: 96
-        y: 32
+        x: 48
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -751,8 +751,8 @@ TextureImporter:
       name: dragontileset_31
       rect:
         serializedVersion: 2
-        x: 112
-        y: 32
+        x: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -772,8 +772,8 @@ TextureImporter:
       name: dragontileset_32
       rect:
         serializedVersion: 2
-        x: 128
-        y: 32
+        x: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -793,8 +793,8 @@ TextureImporter:
       name: dragontileset_33
       rect:
         serializedVersion: 2
-        x: 144
-        y: 32
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -814,7 +814,7 @@ TextureImporter:
       name: dragontileset_34
       rect:
         serializedVersion: 2
-        x: 0
+        x: 112
         y: 16
         width: 16
         height: 16
@@ -835,7 +835,7 @@ TextureImporter:
       name: dragontileset_35
       rect:
         serializedVersion: 2
-        x: 16
+        x: 128
         y: 16
         width: 16
         height: 16
@@ -856,7 +856,7 @@ TextureImporter:
       name: dragontileset_36
       rect:
         serializedVersion: 2
-        x: 32
+        x: 144
         y: 16
         width: 16
         height: 16
@@ -877,8 +877,8 @@ TextureImporter:
       name: dragontileset_37
       rect:
         serializedVersion: 2
-        x: 48
-        y: 16
+        x: 16
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -898,8 +898,8 @@ TextureImporter:
       name: dragontileset_38
       rect:
         serializedVersion: 2
-        x: 64
-        y: 16
+        x: 32
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -919,8 +919,8 @@ TextureImporter:
       name: dragontileset_39
       rect:
         serializedVersion: 2
-        x: 80
-        y: 16
+        x: 48
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -940,8 +940,8 @@ TextureImporter:
       name: dragontileset_40
       rect:
         serializedVersion: 2
-        x: 96
-        y: 16
+        x: 64
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -961,8 +961,8 @@ TextureImporter:
       name: dragontileset_41
       rect:
         serializedVersion: 2
-        x: 112
-        y: 16
+        x: 80
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -982,8 +982,8 @@ TextureImporter:
       name: dragontileset_42
       rect:
         serializedVersion: 2
-        x: 128
-        y: 16
+        x: 96
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -1003,8 +1003,8 @@ TextureImporter:
       name: dragontileset_43
       rect:
         serializedVersion: 2
-        x: 144
-        y: 16
+        x: 112
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -1024,7 +1024,7 @@ TextureImporter:
       name: dragontileset_44
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 0
         width: 16
         height: 16
@@ -1045,7 +1045,7 @@ TextureImporter:
       name: dragontileset_45
       rect:
         serializedVersion: 2
-        x: 16
+        x: 144
         y: 0
         width: 16
         height: 16
@@ -1058,132 +1058,6 @@ TextureImporter:
       bones: []
       spriteID: d98b67bebd8b1d60da8a344dc3f83626
       internalID: -376925417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_46
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db16f8c37911317b895c8de701fbcb00
-      internalID: -1576688442
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_47
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 334b97742ea89c866a67580d95714253
-      internalID: 548238258
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_48
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2e5e67fb476fccb9da591006ba8da857
-      internalID: 987096180
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_49
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0a7bdd749c58518fa91c9de7fbc0fec
-      internalID: -1073185847
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_50
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63bcd58655682ab2fa5b8f6247d6f1e6
-      internalID: 1141438388
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: dragontileset_51
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 119316fad3e049299a50a77ec770bc55
-      internalID: 46936649
       vertices: []
       indices: 
       edges: []
@@ -1240,13 +1114,7 @@ TextureImporter:
       dragontileset_43: 227358774
       dragontileset_44: -1557737844
       dragontileset_45: -376925417
-      dragontileset_46: -1576688442
-      dragontileset_47: 548238258
-      dragontileset_48: 987096180
-      dragontileset_49: -1073185847
       dragontileset_5: 550796420
-      dragontileset_50: 1141438388
-      dragontileset_51: 46936649
       dragontileset_6: 869775501
       dragontileset_7: -1575201057
       dragontileset_8: 1158045373
