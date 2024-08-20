@@ -1,12 +1,17 @@
 using UnityEngine;
 
-public class TeleportOnTouch : MonoBehaviour
+public class Teleport : MonoBehaviour
 {
     public Transform teleportLocation; // The location to which the player will be teleported
     public Color gizmoColor = Color.green; // Color of the Gizmo in the editor
+    private Transform playerTransform;
+    void Start(){
 
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        
         // Check if the object that entered the trigger is the player
         if (other.CompareTag("Player"))
         {
@@ -14,12 +19,12 @@ public class TeleportOnTouch : MonoBehaviour
         }
     }
 
-    private void TeleportPlayer(Transform playerTransform)
+    public void TeleportPlayer(Transform transformToTeleport)
     {
         // Teleport the player to the specified location
         if (teleportLocation != null)
         {
-            playerTransform.position = teleportLocation.position;
+            transformToTeleport.position = teleportLocation.position;
             Debug.Log("Player teleported to " + teleportLocation.position);
         }
         else
@@ -27,7 +32,12 @@ public class TeleportOnTouch : MonoBehaviour
             Debug.LogError("Teleport location not set.");
         }
     }
-
+    public void TeleportPlayer(Transform transformToTeleport,Vector3 location)
+    {
+        // Teleport the player to the specified location
+            transformToTeleport.position = location;
+            Debug.Log("Player teleported to " + location);
+    }
     public void SetTeleportLocation(Transform newLocation)
     {
         teleportLocation = newLocation;

@@ -8,6 +8,7 @@ public class StaminaBar : UIElement
 
     void Start()
     {
+        character = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
         if(character != null){
             // Acquire the game layer from the UIManager singleton
             UILayer gameLayer = UIManager.Instance.GetGameLayer();
@@ -29,7 +30,10 @@ public class StaminaBar : UIElement
     }
 
     void Update() {
-        staminaSlider.value = character.currLatchStamina;
+        if(character != null){
+            staminaSlider.value = character.currLatchStamina; 
+        }
+        
     }
 
 }
