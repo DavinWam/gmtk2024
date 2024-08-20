@@ -8,7 +8,7 @@ public class OptionsPanel : MonoBehaviour
     public Slider volumeSlider;
     public Toggle vsyncToggle;
     private UILayer gameMenuLayer;
-
+    private bool isOptionsOpen = false;
     void Start()
     {
         // Acquire the game menu layer from the UIManager singleton
@@ -24,10 +24,26 @@ public class OptionsPanel : MonoBehaviour
         vsyncToggle.GetComponentInChildren<TextMeshProUGUI>().text = vsyncToggle.isOn.ToString();
     }
 
+    void Update()
+    {
+        // Check if the escape key is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isOptionsOpen)
+            {
+                Close();
 
+            }
+            else
+            {
+                Open();
+                Time.timeScale = 0f; // Pause the game
+            }
+        }
+    }
   public void Open()
     {
-
+            isOptionsOpen = true;
             // Additional logic for when the Options panel opens
             // Load volume or set default to 1 if it doesn't exist
             volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1.0f);
@@ -48,6 +64,8 @@ public class OptionsPanel : MonoBehaviour
             InitializeOptions();
     }
     public void Close(){
+        isOptionsOpen = false;
+        Time.timeScale = 1f; // Pause the game
         PopAllChildren();
     }
       public void PushAllChildren()
