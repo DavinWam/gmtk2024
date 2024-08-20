@@ -249,7 +249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6489522887925485539
 Transform:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ CapsuleCollider2D:
   m_Material: {fileID: 6200000, guid: e35e492784ba5c240be64dcbb004942e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0

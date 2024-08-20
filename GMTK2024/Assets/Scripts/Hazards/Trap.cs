@@ -10,6 +10,8 @@ public class Trap : MonoBehaviour
     public bool debug = false;       // Debug mode to show gizmo
     public bool isPeriodic = false;  // Whether the trap activates periodically
     public float activationInterval = 10f; // Interval between activations when periodic
+    private float secondsSinceActivation = 0.0f;
+    public float startOffset = 0.0f;
 
     private Hazard spawnedTrap;      // Reference to the spawned trap
     private Coroutine periodicRoutine;
@@ -20,11 +22,14 @@ public class Trap : MonoBehaviour
         {
             StartPeriodicActivation();
         }
+        secondsSinceActivation = activationInterval - startOffset;
     }
 
     void Update()
     {
-        
+        if(secondsSinceActivation < activationInterval) {
+            secondsSinceActivation += Time.deltaTime;
+        }
     }
 
     public void ActivateTrap()
@@ -74,7 +79,11 @@ public class Trap : MonoBehaviour
     {
         while (true)
         {
+            if(secondsSinceActivation < activationInterval) {
+                yield return new WaitForSeconds(activationInterval - secondsSinceActivation);
+            }
             ActivateTrap();
+            secondsSinceActivation = 0.0f;
             yield return new WaitForSeconds(activationInterval);
         }
     }
