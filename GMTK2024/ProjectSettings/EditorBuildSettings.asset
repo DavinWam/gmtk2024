@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LegAttack.unity
     guid: fd2168e3f78f24eb6a34551294d9fc26
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: 9dadd34a49bb73f4ab27c8ecab9c175f
   m_configObjects: {}

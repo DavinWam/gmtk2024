@@ -12,6 +12,7 @@ public class Checkpoint : MonoBehaviour
         {
             // Set this checkpoint as the current spawn point in the SpawnManager
             SpawnManager.Instance.SetCheckpoint(this);
+            EnableCollider();
             Debug.Log("Checkpoint reached! Spawn point set to " + checkpointTransform.position);
         }
     }
