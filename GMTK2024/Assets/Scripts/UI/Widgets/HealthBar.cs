@@ -8,6 +8,8 @@ public class HealthBar : UIElement
 
     void Start()
     {
+        damageableObject = GameObject.FindGameObjectWithTag("Player").GetComponent<Combatant>();
+
         if(damageableObject!= null){
             // Acquire the game layer from the UIManager singleton
             UILayer gameLayer = UIManager.Instance.GetGameLayer();
