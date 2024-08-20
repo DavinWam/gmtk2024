@@ -249,7 +249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6489522887925485539
 Transform:
   m_ObjectHideFlags: 0
@@ -355,9 +355,9 @@ MonoBehaviour:
   latchCooldown: 0.2
   longLatchCooldown: 2
   maxLatchStamina: 100
-  staminaDrainMultiplier: 20
-  staminaGainMultiplierAir: 4
-  staminaGainMultiplierGround: 30
+  staminaDrainMultiplier: 60
+  staminaGainMultiplierAir: 20
+  staminaGainMultiplierGround: 60
   currLatchStamina: 0
   climbableLayer:
     serializedVersion: 2
