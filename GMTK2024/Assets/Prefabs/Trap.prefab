@@ -111,7 +111,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6.71, y: -3.12, z: 0}
-  m_LocalScale: {x: 2.7147226, y: 1.3583, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8708530162250035433}
@@ -132,7 +132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnLocation: {fileID: 1654664790826157585}
   trapPrefab: {fileID: 9071634914688318531, guid: c90477ce3f491cb41b615481bff7662d, type: 3}
+  duration: 5
+  damage: 10
   debug: 1
+  isPeriodic: 0
+  activationInterval: 10
 --- !u!1 &9089723332083281763
 GameObject:
   m_ObjectHideFlags: 0

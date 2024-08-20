@@ -69,7 +69,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -483,9 +483,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 360973053490141860, guid: 8ff7644675d88aa449089fa824d5df49, type: 3}
       insertIndex: -1
       addedObject: {fileID: 823423772533094612}
-    - targetCorrespondingSourceObject: {fileID: 360973053490141860, guid: 8ff7644675d88aa449089fa824d5df49, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6479022835933053497}
   m_SourcePrefab: {fileID: 100100000, guid: 8ff7644675d88aa449089fa824d5df49, type: 3}
 --- !u!4 &4318243496250142677 stripped
 Transform:
@@ -571,22 +568,6 @@ BoxCollider2D:
   m_Size: {x: 0.0001, y: 0.0001}
   m_EdgeRadius: 0
 --- !u!114 &823423772533094612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6486709947005851245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22ab0df67b2fc0f4dbc624ead50688e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageableLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  damageAmount: 10
---- !u!114 &6479022835933053497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
@@ -9,16 +8,20 @@ public class Trap : MonoBehaviour
     public float duration = 5f;
     public float damage = 10.0f;
     public bool debug = false;       // Debug mode to show gizmo
+    public bool isPeriodic = false;  // Whether the trap activates periodically
+    public float activationInterval = 10f; // Interval between activations when periodic
 
     private Hazard spawnedTrap;      // Reference to the spawned trap
-    // Start is called before the first frame update
+    private Coroutine periodicRoutine;
+
     void Start()
     {
-
+        if (isPeriodic)
+        {
+            StartPeriodicActivation();
+        }
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         
@@ -47,6 +50,32 @@ public class Trap : MonoBehaviour
         else
         {
             Debug.LogError("Trap prefab or spawn location not set.");
+        }
+    }
+
+    public void StartPeriodicActivation()
+    {
+        if (periodicRoutine == null)
+        {
+            periodicRoutine = StartCoroutine(PeriodicActivation());
+        }
+    }
+
+    public void StopPeriodicActivation()
+    {
+        if (periodicRoutine != null)
+        {
+            StopCoroutine(periodicRoutine);
+            periodicRoutine = null;
+        }
+    }
+
+    private IEnumerator PeriodicActivation()
+    {
+        while (true)
+        {
+            ActivateTrap();
+            yield return new WaitForSeconds(activationInterval);
         }
     }
 
