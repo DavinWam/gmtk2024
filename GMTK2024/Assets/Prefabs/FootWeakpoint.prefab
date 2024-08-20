@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkDuration: 0.05
-  spriteWhite: {fileID: 2100000, guid: d849e9b24a65fb8439248c423a1a9f19, type: 2}
+  spriteWhite: {fileID: 2100000, guid: 67db071f481038340b881c346e8db7ec, type: 2}
 --- !u!114 &6105824140011273576
 MonoBehaviour:
   m_ObjectHideFlags: 0

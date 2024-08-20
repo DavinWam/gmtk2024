@@ -105,6 +105,8 @@ public class AnimationController2D : MonoBehaviour
     }
     public void DamageAnim(float amount){
         animator.SetTrigger("Hit");
+        spriteEffects.StopFlash(1);
+        spriteRenderer.material.SetColor("_Color", Color.white);
         spriteEffects.SpriteFlash(playerCombatant.HitInvinciblityDuration,Color.white,1);
     }
     public void DieAnim(){

@@ -17259,6 +17259,10 @@ PrefabInstance:
       propertyPath: invincible
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7321233454669358878, guid: b9ce343ebc0894889a7904915f6dffeb, type: 3}
+      propertyPath: spriteWhite
+      value: 
+      objectReference: {fileID: 2100000, guid: 67db071f481038340b881c346e8db7ec, type: 2}
     - target: {fileID: 7686271239404835727, guid: b9ce343ebc0894889a7904915f6dffeb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.551596
