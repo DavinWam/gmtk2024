@@ -36,18 +36,24 @@ public class BasicHazard : Hazard
             hazardCollider.enabled = false;
         }
     }
+
     public override void HandleDuration(){
         Debug.Log("duration");
+        if(duration == 0) return;
+
         StartCoroutine(AutoClose());
     }
+     
     IEnumerator AutoClose(){
         yield return new WaitForSeconds(duration);
         TurnOff();
     }
+     
     public override void SetDuration(float newDuration)
     {
         duration = newDuration;
     }
+
     public override float GetDuration()
     {
         return duration;

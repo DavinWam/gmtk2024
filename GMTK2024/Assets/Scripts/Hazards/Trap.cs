@@ -7,6 +7,7 @@ public class Trap : MonoBehaviour
     public Transform spawnLocation;  // Public transform to set spawn location
     public GameObject trapPrefab;    // Prefab to spawn
     public float duration = 5f;
+    public float damage = 10.0f;
     public bool debug = false;       // Debug mode to show gizmo
 
     private Hazard spawnedTrap;      // Reference to the spawned trap
@@ -22,6 +23,7 @@ public class Trap : MonoBehaviour
     {
         
     }
+
     public void ActivateTrap()
     {
         Debug.Log("Trap activated!");
@@ -35,6 +37,11 @@ public class Trap : MonoBehaviour
             {
                 spawnedTrap.SetDuration(duration);
                 spawnedTrap.TurnOn();  // Turn on the trap when it spawns
+
+                DamageTick dt = trapObject.GetComponent<DamageTick>();
+                if(dt != null) {
+                    dt.damagePerTick = damage;
+                }
             }
         }
         else
@@ -42,6 +49,7 @@ public class Trap : MonoBehaviour
             Debug.LogError("Trap prefab or spawn location not set.");
         }
     }
+
     void OnDrawGizmos()
     {
         if (debug && spawnLocation != null)
