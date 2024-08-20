@@ -4,8 +4,8 @@ using UnityEngine;
 public class BasicHazard : Hazard
 {
     private Collider2D hazardCollider;
-    private float duration;
-
+  
+    private float duration = 5f;
     public virtual void Awake()
     {
         // Get the BoxCollider2D component on this GameObject
