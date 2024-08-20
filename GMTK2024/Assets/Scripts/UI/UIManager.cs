@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using UnityEngine.PlayerLoop;
+using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     
@@ -31,13 +32,24 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Optional: Keep this UIManager across different scenes
+             SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
         }
         else
         {
             Destroy(gameObject); // Ensure there's only one instance
         }
     }
-
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("loading... " + scene.name);
+        Initialization();
+    }
+    private void Initialization(){
+       gameLayer = GameObject.Find("GameLayer").GetComponent<UILayer>();
+       gameMenuLayer = GameObject.Find("GameMenu").GetComponent<UILayer>();
+       menuLayer = GameObject.Find("MenuLayer").GetComponent<UILayer>();
+       modalLayer = GameObject.Find("ModalLayer").GetComponent<UILayer>();
+    }
     public UILayer GetGameLayer()
     {
         return gameLayer;
