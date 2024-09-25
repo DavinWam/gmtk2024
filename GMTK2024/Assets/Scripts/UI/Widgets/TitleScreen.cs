@@ -41,6 +41,7 @@ public class TitleScreen : MonoBehaviour
     public void EndGame()
     {
         SceneManager.LoadSceneAsync("EndScene");
+        SpawnManager.Instance.ClearCheckpoint();
     }
 
 

@@ -3,14 +3,35 @@ using UnityEngine;
 
 public class UILayer : MonoBehaviour, IUILayer
 {
+    public enum LayerType{
+        None,
+        Game,
+        GameMenu,
+        Modal,
+        Menu
+    }
     private List<UIElement> uiElements = new List<UIElement>();
 
     // Reference to the UIManager to access other layers
     private UIManager uiManager;
-
+    public LayerType layerType;
     void Start()
     {
         uiManager = UIManager.Instance; // Get the reference to the UIManager
+        switch (layerType){
+            case LayerType.Game:
+                SetGame();
+                break;
+            case LayerType.Modal:
+                SetModal();
+                break;
+            case LayerType.GameMenu:
+                SetGameMenu();
+                break;
+            case LayerType.Menu:
+                SetMenu();
+                break;
+        }
     }
 
     public void Push(UIElement element)
@@ -54,7 +75,7 @@ public class UILayer : MonoBehaviour, IUILayer
 
     // New method to hide other UI layers
     public void HideOthers(){
-        uiManager.HideOtherLayers(this);
+         UIManager.Instance.HideOtherLayers(this);
     }
 
     // Method to hide all UI elements in the current layer
@@ -64,5 +85,17 @@ public class UILayer : MonoBehaviour, IUILayer
         {
             element.Hide();
         }
+    }
+    public void SetGame(){
+        UIManager.Instance.gameLayer = this;
+    }
+    public void SetMenu(){
+        UIManager.Instance.menuLayer = this;
+    }
+        public void SetGameMenu(){
+        UIManager.Instance.gameMenuLayer = this;
+    }
+        public void SetModal(){
+        UIManager.Instance.modalLayer = this;
     }
 }

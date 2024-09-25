@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,7 +6,7 @@ public class TitleScreenAnimation : MonoBehaviour
 {
     public UnityEvent onPlayerEnter;  // Event to trigger when the player enters the hitbox
     public UnityEvent onFinishedWalk; // Event to trigger when the player has finished walking
-
+    private bool wentOff = false;
     void OnTriggerEnter2D(Collider2D other)
     {        // Check if the object entering the trigger is the player
         if (other.CompareTag("Player"))
@@ -30,14 +31,18 @@ public class TitleScreenAnimation : MonoBehaviour
                 playerController.animationController2D.OnFinishedIntroWalk += TriggerFinishedWalk;
                 if (playerController.IsGrounded())
                 {
-                    onPlayerEnter?.Invoke();  // Invoke the Unity event
+                    if (wentOff == false){
+                        wentOff = true;
+                        onPlayerEnter?.Invoke();  // Invoke the Unity event
+                    }
                 }
                 else
                 {
+                    
                     // Subscribe to the OnGrounded event
                     playerController.OnGrounded += HandlePlayerGrounded;
                 }
-
+                StartCoroutine(FailSafe());
             }
         }
 
@@ -46,18 +51,32 @@ public class TitleScreenAnimation : MonoBehaviour
 
     private void HandlePlayerGrounded()
     {
-        onPlayerEnter?.Invoke();  // Invoke the Unity event
+        if (wentOff == false){
+            wentOff = true;
+            onPlayerEnter?.Invoke();  // Invoke the Unity event
 
 
-        CharacterController2D playerController = GetComponent<CharacterController2D>();
-        if (playerController != null)
-        {
-            playerController.OnGrounded -= HandlePlayerGrounded;
+            CharacterController2D playerController = GetComponent<CharacterController2D>();
+            if (playerController != null)
+            {
+                playerController.OnGrounded -= HandlePlayerGrounded;
+            }
+        }
+        
+    }
+    public IEnumerator FailSafe(){
+        yield return new WaitForSeconds(1f);
+        if(wentOff == false){
+            wentOff = true;
+             onPlayerEnter?.Invoke();
         }
     }
     private void TriggerFinishedWalk()
     {
         Debug.Log("Player finished walking");
         onFinishedWalk?.Invoke();  // Invoke the Unity event for finished walk
+    }
+    public void ClearManager(){
+        SpawnManager.Instance.moveSpawn = false;
     }
 }

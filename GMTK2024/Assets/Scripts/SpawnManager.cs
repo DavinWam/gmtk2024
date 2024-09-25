@@ -9,6 +9,7 @@ public class SpawnManager : MonoBehaviour
     private string currentCheckpointID = null; // Unique ID of the current checkpoint
     private Checkpoint currentCheckpoint = null;
     private Teleport teleportScript;
+    public bool moveSpawn = true;
     private void Awake()
     {
         if (Instance == null)
@@ -26,6 +27,7 @@ public class SpawnManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (moveSpawn == false) return;
         // This method is called every time a new scene is loaded
         if (currentCheckpointID != null)
         {

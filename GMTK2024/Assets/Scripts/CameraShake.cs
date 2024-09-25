@@ -7,7 +7,7 @@ public class CameraShake : MonoBehaviour
 
     private Vector3 initialPosition; // To store the original position of the camera
     private float remainingShakeTime;
-
+    public AudioSource audioSource;
     void Start()
     {
         initialPosition = transform.localPosition;
@@ -29,6 +29,7 @@ public class CameraShake : MonoBehaviour
 
     public void TriggerShake(float duration, float magnitude)
     {
+        audioSource.Play();
         shakeDuration = duration;
         shakeMagnitude = magnitude;
         remainingShakeTime = duration;

@@ -11,12 +11,15 @@ public class AnimationController2D : MonoBehaviour
     private CharacterController2D characterController;
     private PlayerCombatant playerCombatant;
     private SpriteEffects spriteEffects;
+    private SoundPlayer soundPlayer;
+    public bool isPlayingRunningSound = false;
     public event System.Action OnFinishedIntroWalk;
  void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteEffects = GetComponent<SpriteEffects>();
         animator = GetComponent<Animator>();
+        soundPlayer = GetComponent<SoundPlayer>();
 
         // Get the CharacterController2D from the parent object
         characterController = GetComponentInParent<CharacterController2D>();
@@ -145,10 +148,18 @@ public class AnimationController2D : MonoBehaviour
             if (Mathf.Abs(rb.velocity.x) > 0.1f && isGrounded)
             {
                 animator.SetBool("IsRunning", true);
+                if (!isPlayingRunningSound)
+                {
+                    PlayRunningSound();
+                }
             }
             else
             {
                 animator.SetBool("IsRunning", false);
+                if (isPlayingRunningSound)
+                {
+                    StopRunningSound();
+                }
             }
 
             // Check if the character is not grounded
@@ -162,6 +173,29 @@ public class AnimationController2D : MonoBehaviour
             }
         }
 
+    }
+
+    
+
+    private void PlayRunningSound()
+    {
+        if (soundPlayer != null)
+        {
+            soundPlayer.audioSource.loop = true;
+            soundPlayer.audioSource.Play();
+            isPlayingRunningSound = true;
+            Debug.Log("playing sound");
+        }
+    }
+
+    private void StopRunningSound()
+    {
+        if (soundPlayer != null)
+        {
+            soundPlayer.audioSource.loop = false;
+            soundPlayer.audioSource.Stop();
+            isPlayingRunningSound = false;
+        }
     }
     public void TriggerFinishedWalk(){
         OnFinishedIntroWalk?.Invoke();

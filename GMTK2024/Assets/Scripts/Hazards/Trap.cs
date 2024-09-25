@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour
 
     private Hazard spawnedTrap;      // Reference to the spawned trap
     private Coroutine periodicRoutine;
-
+    public AudioSource audioSource;
     void Start()
     {
         if (isPeriodic)
@@ -34,6 +34,7 @@ public class Trap : MonoBehaviour
 
     public void ActivateTrap()
     {
+        audioSource.Play();
         Debug.Log("Trap activated!");
         // Spawn the trap at the designated location
         if (trapPrefab != null && spawnLocation != null)

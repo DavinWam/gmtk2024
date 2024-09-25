@@ -5,8 +5,15 @@ public class QuitGame : MonoBehaviour
 {
     public void Quit()
     {
-        Debug.Log("Quit game.");
-        Application.Quit();  // Quits the game when built
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            SceneManager.LoadSceneAsync("TitleScene"); 
+        }
+        else
+        {
+            Debug.Log("Quit game.");
+            Application.Quit();  // Quits the game when built (not applicable to WebGL)
+        }
     }
 
     public void RestartGame()
@@ -14,4 +21,6 @@ public class QuitGame : MonoBehaviour
         Debug.Log("Restart game.");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  // Reloads the current scene
     }
+
+
 }

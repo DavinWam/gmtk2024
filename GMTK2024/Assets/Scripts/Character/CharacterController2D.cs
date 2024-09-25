@@ -43,8 +43,10 @@ public class CharacterController2D : MonoBehaviour
     public event System.Action OnGrounded;
     private PlayerCombatant playerCombatant;
     private bool isLocked = false;
+    public SoundPlayer sp;
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         currLatchStamina = maxLatchStamina;
@@ -55,7 +57,7 @@ public class CharacterController2D : MonoBehaviour
     void Update()
     {
         
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        isGrounded = IsGrounded();
         if(isLocked) return;
 
         if(isLatching) {
@@ -89,7 +91,9 @@ public class CharacterController2D : MonoBehaviour
     private void Attack(){
         if(Input.GetMouseButtonDown(0) && canAttack){
             animationController2D.Attack();
+            sp.audioSource.Play();
             StartCoroutine(AttackCooldownCoroutine());
+
         }
     }
 
